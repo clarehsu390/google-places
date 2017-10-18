@@ -5,8 +5,7 @@ class Search extends React.Component {
         
         super(props);
         this.state = {
-            query: "",
-            map: this.map
+            query: ""
         };
 
         this.update = this.update.bind(this);
@@ -14,19 +13,14 @@ class Search extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         // this.createMarker = this.createMarker.bind(this);
     }
+
+    componentDidMount() {
+        let input = document.getElementById('search-box');
+        this.searchBox = new google.maps.places.SearchBox(input);
+
+    }
     handleSubmit() {
-        let google = window.google;
-        const service = new google.maps.places.PlacesService(new google.maps.Map(document.getElementById('map-container'), {
-            center: pos,
-            zoom: 13
-          }););
-        service.nearbySearch({
-            location: {lat: 37.7758, lng: -122.435},
-            radius: 500,
-            type: [this.state]},
-            this.callback
-        );
-        console.log(this.props);
+        this.searchBox.setBounds(this.map.getBounds());
     }
 
 
@@ -36,9 +30,7 @@ class Search extends React.Component {
     render() {
         return(
             <div id="search">
-                <input type="text" placeholder="Search" value={this.state.query} onChange={this.update()}/>
-                <button onClick={this.handleSubmit}>Search</button>
-                <Results />
+               <input type="text" id="search-box" onSubmit={this.handleSubmit}/>
             </div>
         );
     }
