@@ -15,7 +15,7 @@ class Search extends React.Component {
 
     componentDidMount() {
         let input = document.getElementById('search-box');
-        this.searchBox = new google.maps.places.SearchBox(input);
+        this.searchBox = new google.maps.places.Autocomplete(input);
         
         if (this.searchBox && this.props.map) {
             this.props.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -29,8 +29,9 @@ class Search extends React.Component {
     }
     render() {
         return(
-            <div id="search" autocomplete="on">
+            <div id="search">
                <input type="text" id="search-box" placeholder="Search"/>
+               <Results search={this.searchBox}/>
             </div>
         );
     }

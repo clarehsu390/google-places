@@ -1003,7 +1003,7 @@ var Search = function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             var input = document.getElementById('search-box');
-            this.searchBox = new google.maps.places.SearchBox(input);
+            this.searchBox = new google.maps.places.Autocomplete(input);
 
             if (this.searchBox && this.props.map) {
                 this.props.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -1018,8 +1018,9 @@ var Search = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { id: 'search', autocomplete: 'on' },
-                _react2.default.createElement('input', { type: 'text', id: 'search-box', placeholder: 'Search' })
+                { id: 'search' },
+                _react2.default.createElement('input', { type: 'text', id: 'search-box', placeholder: 'Search' }),
+                _react2.default.createElement(_results2.default, { search: this.searchBox })
             );
         }
     }]);
@@ -21404,9 +21405,52 @@ exports.default = Map;
 
 /***/ }),
 /* 35 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: missing super() call in constructor\n\n\u001b[0m \u001b[90m 2 | \u001b[39m\n \u001b[90m 3 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m \u001b[36mclass\u001b[39m \u001b[33mResults\u001b[39m \u001b[36mextends\u001b[39m \u001b[33mReact\u001b[39m\u001b[33m.\u001b[39m\u001b[33mComponent\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 | \u001b[39m    constructor(props) {\n \u001b[90m   | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 | \u001b[39m        \n \u001b[90m 6 | \u001b[39m    }\n \u001b[90m 7 | \u001b[39m}\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Results = function (_React$Component) {
+    _inherits(Results, _React$Component);
+
+    function Results(props) {
+        _classCallCheck(this, Results);
+
+        return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
+    }
+
+    _createClass(Results, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {}
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement('div', null);
+        }
+    }]);
+
+    return Results;
+}(_react2.default.Component);
+
+exports.default = Results;
 
 /***/ })
 /******/ ]);
