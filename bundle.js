@@ -993,9 +993,8 @@ var Search = function (_React$Component) {
             query: ""
         };
 
-        _this.update = _this.update.bind(_this);
         // this.callback = this.callback.bind(this);
-        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        _this.handleClick = _this.handleClick.bind(_this);
         // this.createMarker = this.createMarker.bind(this);
         return _this;
     }
@@ -1005,28 +1004,20 @@ var Search = function (_React$Component) {
         value: function componentDidMount() {
             var input = document.getElementById('search-box');
             this.searchBox = new google.maps.places.SearchBox(input);
+            if (this.searchBox && this.props.map) {
+                this.searchBox.setBounds(this.props.map.getBounds());
+            }
         }
     }, {
-        key: 'handleSubmit',
-        value: function handleSubmit() {
-            this.searchBox.setBounds(this.map.getBounds());
-        }
-    }, {
-        key: 'update',
-        value: function update() {
-            var _this2 = this;
-
-            return function (e) {
-                return _this2.setState({ query: e.currentTarget.value });
-            };
-        }
+        key: 'handleClick',
+        value: function handleClick() {}
     }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 { id: 'search' },
-                _react2.default.createElement('input', { type: 'text', id: 'search-box', onSubmit: this.handleSubmit })
+                _react2.default.createElement('input', { type: 'text', id: 'search-box' })
             );
         }
     }]);
@@ -21356,15 +21347,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Map = function (_React$Component) {
     _inherits(Map, _React$Component);
 
-    function Map() {
+    function Map(props) {
         _classCallCheck(this, Map);
 
-        return _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
+
+        _this.state = {
+            map: null
+        };
+
+        return _this;
     }
 
     _createClass(Map, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
+            var _this2 = this;
+
             var google = window.google;
 
             if (navigator.geolocation) {
@@ -21373,13 +21372,13 @@ var Map = function (_React$Component) {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-                    var map = new google.maps.Map(document.getElementById('map-container'), {
-                        center: pos,
-                        zoom: 13
-                    });
+                    _this2.setState({ map: new google.maps.Map(document.getElementById('map-container'), {
+                            center: pos,
+                            zoom: 13
+                        }) });
                     var marker = new google.maps.Marker({
                         position: pos,
-                        map: map
+                        map: _this2.state.map
 
                     });
                 });
@@ -21391,7 +21390,7 @@ var Map = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { id: 'map-container', ref: 'map' },
-                _react2.default.createElement(_search2.default, { map: this.map })
+                _react2.default.createElement(_search2.default, { map: this.state.map })
             );
         }
     }]);

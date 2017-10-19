@@ -8,29 +8,27 @@ class Search extends React.Component {
             query: ""
         };
 
-        this.update = this.update.bind(this);
         // this.callback = this.callback.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         // this.createMarker = this.createMarker.bind(this);
     }
 
     componentDidMount() {
         let input = document.getElementById('search-box');
         this.searchBox = new google.maps.places.SearchBox(input);
+        if (this.searchBox && this.props.map) {
+            this.searchBox.setBounds(this.props.map.getBounds());
+        }
 
     }
-    handleSubmit() {
-        this.searchBox.setBounds(this.map.getBounds());
-    }
-
-
-    update() {
-        return e => this.setState({query: e.currentTarget.value});
+    handleClick() {
+        
+        
     }
     render() {
         return(
             <div id="search">
-               <input type="text" id="search-box" onSubmit={this.handleSubmit}/>
+               <input type="text" id="search-box"/>
             </div>
         );
     }
