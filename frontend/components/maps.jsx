@@ -36,8 +36,9 @@ export default class Map extends React.Component {
     
     render() {
         return (
-            <div id='map-container' ref="map">
-                <Search map={this.state.map} />
+            <div id="map">
+            <Search map={this.state.map} />
+            <div id='map-container' ref="map"></div>
             </div>
         );
     }

@@ -1004,7 +1004,9 @@ var Search = function (_React$Component) {
         value: function componentDidMount() {
             var input = document.getElementById('search-box');
             this.searchBox = new google.maps.places.SearchBox(input);
+
             if (this.searchBox && this.props.map) {
+                this.props.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
                 this.searchBox.setBounds(this.props.map.getBounds());
             }
         }
@@ -1016,7 +1018,7 @@ var Search = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { id: 'search-box' },
+                { id: 'search', autocomplete: 'on' },
                 _react2.default.createElement('input', { type: 'text', id: 'search-box', placeholder: 'Search' })
             );
         }
@@ -21388,8 +21390,9 @@ var Map = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { id: 'map-container', ref: 'map' },
-                _react2.default.createElement(_search2.default, { map: this.state.map })
+                { id: 'map' },
+                _react2.default.createElement(_search2.default, { map: this.state.map }),
+                _react2.default.createElement('div', { id: 'map-container', ref: 'map' })
             );
         }
     }]);
@@ -21401,40 +21404,9 @@ exports.default = Map;
 
 /***/ }),
 /* 35 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(2);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Results = function (_React$Component) {
-  _inherits(Results, _React$Component);
-
-  function Results() {
-    _classCallCheck(this, Results);
-
-    return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).apply(this, arguments));
-  }
-
-  return Results;
-}(_react2.default.Component);
-
-exports.default = Results;
+throw new Error("Module build failed: SyntaxError: missing super() call in constructor\n\n\u001b[0m \u001b[90m 2 | \u001b[39m\n \u001b[90m 3 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m \u001b[36mclass\u001b[39m \u001b[33mResults\u001b[39m \u001b[36mextends\u001b[39m \u001b[33mReact\u001b[39m\u001b[33m.\u001b[39m\u001b[33mComponent\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 | \u001b[39m    constructor(props) {\n \u001b[90m   | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 | \u001b[39m        \n \u001b[90m 6 | \u001b[39m    }\n \u001b[90m 7 | \u001b[39m}\u001b[0m\n");
 
 /***/ })
 /******/ ]);
