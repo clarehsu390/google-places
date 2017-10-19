@@ -27,8 +27,8 @@ class Search extends React.Component {
     }
     render() {
         return(
-            <div id="search">
-               <input type="text" id="search-box"/>
+            <div id="search-box">
+               <input type="text" id="search-box" placeholder="Search"/>
             </div>
         );
     }

@@ -1016,8 +1016,8 @@ var Search = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { id: 'search' },
-                _react2.default.createElement('input', { type: 'text', id: 'search-box' })
+                { id: 'search-box' },
+                _react2.default.createElement('input', { type: 'text', id: 'search-box', placeholder: 'Search' })
             );
         }
     }]);
@@ -21304,7 +21304,6 @@ var App = function (_Component) {
           null,
           'Maps'
         ),
-        _react2.default.createElement(_search2.default, null),
         _react2.default.createElement(_maps2.default, null)
       );
     }
