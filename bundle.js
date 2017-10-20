@@ -990,12 +990,12 @@ var Search = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
 
         _this.state = {
-            query: ""
+            markers: []
         };
 
         // this.callback = this.callback.bind(this);
-        _this.handleClick = _this.handleClick.bind(_this);
-        // this.createMarker = this.createMarker.bind(this);
+        // this.handleClick = this.handleClick.bind(this);
+        _this.createMarkers = _this.createMarkers.bind(_this);
         return _this;
     }
 
@@ -1003,24 +1003,59 @@ var Search = function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             var input = document.getElementById('search-box');
-            this.searchBox = new google.maps.places.Autocomplete(input);
-
+            this.searchBox = new google.maps.places.SearchBox(input);
+            this.service = new google.maps.places.PlacesService(this.props.map);
+            console.log(this.props.map);
             if (this.searchBox && this.props.map) {
-                this.props.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
                 this.searchBox.setBounds(this.props.map.getBounds());
             }
         }
     }, {
-        key: 'handleClick',
-        value: function handleClick() {}
+        key: 'createMarkers',
+        value: function createMarkers() {
+            var places = this.searchBox.getPlaces();
+
+            if (places.length === 0) {
+                return;
+            }
+
+            this.state.markers.forEach(function (marker) {
+                marker.setMap(null);
+            });
+            this.setState({ markers: [] });
+
+            places.forEach(function (place) {
+                var bounds = new google.maps.LatLngBounds();
+                var icon = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25)
+
+                };
+            });
+
+            this.state.markers.push(new google.maps.Marker({
+                map: this.props.map,
+                icon: icon,
+                title: place.name,
+                position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+        }
     }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 { id: 'search' },
-                _react2.default.createElement('input', { type: 'text', id: 'search-box', placeholder: 'Search' }),
-                _react2.default.createElement(_results2.default, { search: this.searchBox })
+                _react2.default.createElement('input', { type: 'text', id: 'search-box', placeholder: 'Search' })
             );
         }
     }]);
@@ -21366,7 +21401,10 @@ var Map = function (_React$Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            var google = window.google;
+            this.setState({ map: new google.maps.Map(document.getElementById('map-container'), {
+                    center: { lat: 37.7749, lng: 122.4194 },
+                    zoom: 13
+                }) });
 
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {

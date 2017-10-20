@@ -11,7 +11,12 @@ export default class Map extends React.Component {
         
     }
     componentDidMount() {
-        const google = window.google;
+        this.setState({map: new google.maps.Map(
+            document.getElementById('map-container'), {
+                center: {lat: 37.7749, lng: 122.4194},
+                zoom: 13
+            }
+        )});
 
        if (navigator.geolocation) {
            navigator.geolocation.getCurrentPosition((position) => {
@@ -37,7 +42,7 @@ export default class Map extends React.Component {
     render() {
         return (
             <div id="map">
-            <Search map={this.state.map} />
+                <Search map={this.state.map} />
             <div id='map-container' ref="map"></div>
             </div>
         );
